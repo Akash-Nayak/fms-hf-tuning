@@ -254,7 +254,7 @@ def train(
         + tokenizer.eos_token
     }
 
-    json_dataset = datasets.load_dataset("json", data_files=data_files)
+    json_dataset = datasets.load_dataset("arrow", data_files=data_files)
     if data_args.data_formatter_template:
         (
             formatted_train_dataset,
@@ -267,6 +267,7 @@ def train(
     else:
         formatted_train_dataset = json_dataset["train"].map(format_dataset)
     logger.info("Training dataset length is %s", len(formatted_train_dataset))
+    logger.info("Data args: %s", data_args)
 
     formatted_validation_dataset = None
     if data_args.validation_data_path:
