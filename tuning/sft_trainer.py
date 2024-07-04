@@ -254,6 +254,7 @@ def train(
         + tokenizer.eos_token
     }
 
+    logger.info("Loading arrow data from: %s", data_files)
     json_dataset = datasets.load_dataset("arrow", data_files=data_files)
     if data_args.data_formatter_template:
         (
