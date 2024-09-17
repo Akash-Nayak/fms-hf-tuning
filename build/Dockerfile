@@ -51,7 +51,7 @@ RUN useradd -u $USER_UID ${USER} -m -g 0 --system && \
 FROM base AS release-base
 
 # Removes the python3.9 code to eliminate possible CVEs.  Also removes dnf
-RUN rpm -e $(dnf repoquery python3-* -q --installed) dnf python3 yum crypto-policies-scripts
+# RUN rpm -e $(dnf repoquery python3-* -q --installed) dnf python3 yum crypto-policies-scripts
 
 
 ## CUDA Base ###################################################################
@@ -195,5 +195,6 @@ WORKDIR /app
 USER ${USER}
 COPY --from=python-installations /home/${USER}/.local /home/${USER}/.local
 ENV PYTHONPATH="/home/${USER}/.local/lib/python${PYTHON_VERSION}/site-packages"
+COPY --from=cuda-devel /usr/local /home/${USER}/.local
 
 CMD [ "python", "/app/accelerate_launch.py" ]
