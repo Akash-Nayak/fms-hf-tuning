@@ -20,7 +20,7 @@ fsdp_config:
 
   # setting this to true will increase forward memory by prefetching the next FSDP all-gather, while performing
   # the current forward pass. 
-  fsdp_forward_prefetch: false
+  fsdp_forward_prefetch: true
 
   # setting this will offload model and optimizer parameters to the CPU, to save GPU memory at a significant
   # increase of CPU time.
@@ -36,6 +36,7 @@ fsdp_config:
  
   fsdp_cpu_ram_efficient_loading: true # for large models set to true, model loaded on single process
   fsdp_sync_module_states: true # for large models set to true, model loaded on single process
+  use_orig_params: true
 
   # not needed for HF models that have . _no_split_modules
   # the example below is for GPTBigCode

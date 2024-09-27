@@ -170,6 +170,7 @@ def get_data_collator(
                 response_template=response_template_ids,
                 tokenizer=tokenizer,
                 ignore_index=configs.IGNORE_INDEX,
+                padding_free=True,
             )
         # Note that this automatically pads labels with -100
         # TODO check if this is sufficient for preprocessed
