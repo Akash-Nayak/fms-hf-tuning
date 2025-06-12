@@ -165,6 +165,7 @@ RUN if [[ "${ENABLE_FMS_ACCELERATION}" == "true" ]]; then \
         python -m fms_acceleration.cli install fms_acceleration_foak; \
         python -m fms_acceleration.cli install fms_acceleration_aadp; \
         python -m fms_acceleration.cli install fms_acceleration_moe; \
+        python -m pip install bitsandbytes==0.45.2; \
     fi
 
 RUN if [[ "${ENABLE_AIM}" == "true" ]]; then \
