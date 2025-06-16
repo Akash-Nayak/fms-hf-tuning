@@ -117,9 +117,14 @@ def get_data_collator(
         )
 
     if response_template:
+        response_template_ids_org = tokenizer.encode(
+            response_template, add_special_tokens=False
+        )
+        logging.info("\n\n===============================\nResponse template IDs: %s", response_template_ids_org)
         response_template_ids = tokenizer.encode(
             response_template, add_special_tokens=False
         )[2:]
+        logging.info("\n\n===============================\n Cleaned Response template IDs: %s", response_template_ids)
         return DataCollatorForCompletionOnlyLM(
             response_template=response_template_ids,
             tokenizer=tokenizer,
