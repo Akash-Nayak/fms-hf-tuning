@@ -108,7 +108,6 @@ def get_data_collator(
     # otherwise template is not found. We will create issue to clean this out after we discuss
     # data formats and collators we will support.
     if response_template and instruction_template:
-        logger.info("\n===============================\n Using response_template and instruction_template\n")
         # Pass both instruction and response template for chat style training.
         return DataCollatorForCompletionOnlyLM(
             response_template=response_template,
@@ -118,16 +117,8 @@ def get_data_collator(
         )
 
     if response_template:
-        logger.info("\n===============================\n Using only response_template\n")
-        response_template_ids = tokenizer.encode(
-            response_template, add_special_tokens=False
-        )
-        logger.info("\n===============================\nResponse template IDs: %s", response_template_ids)
-        logger.info("\nCleaned Response template IDs: %s\n===============================\n\n", response_template_ids[2:])
-        if len(response_template_ids)>2:
-            response_template_ids = response_template_ids[2:]
         return DataCollatorForCompletionOnlyLM(
-            response_template=response_template_ids,
+            response_template=response_template,
             tokenizer=tokenizer,
             ignore_index=configs.IGNORE_INDEX,
         )
