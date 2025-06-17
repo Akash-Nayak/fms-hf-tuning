@@ -117,8 +117,13 @@ def get_data_collator(
         )
 
     if response_template:
+        response_template_ids = tokenizer.encode(
+            response_template, add_special_tokens=False
+        )
+        if len(response_template_ids)>2:
+            response_template_ids = response_template_ids[2:]
         return DataCollatorForCompletionOnlyLM(
-            response_template=response_template,
+            response_template=response_template_ids,
             tokenizer=tokenizer,
             ignore_index=configs.IGNORE_INDEX,
         )
