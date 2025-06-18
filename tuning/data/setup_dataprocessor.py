@@ -383,10 +383,6 @@ def _process_raw_data_args(
     # And let processor handle the logic
     train_dataset = data_processor.process_dataset_configs([train_dataset_config])
 
-    logger.info("\n============================\nTrain dataset size: %s", len(train_dataset))
-    if len(train_dataset) > 0:
-        logger.info("\nFirst sample in the train dataset : %s", train_dataset[0])
-
     eval_dataset = None
     if is_eval_dataset_present:
         eval_dataset = data_processor.process_dataset_configs([eval_dataset_config])
