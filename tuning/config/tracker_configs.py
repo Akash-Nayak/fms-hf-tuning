@@ -52,6 +52,7 @@ class TrackerConfigs:
     ################## Clearml Related ######################
     clearml_project: str = DEFAULT_EXP_NAME
     clearml_task: str = "SFTTrainer"
+    clearml_tags: str = "tuning"
 
     ################## Scanner Related ######################
     scanner_output_filename: str = "scanner_output.json"

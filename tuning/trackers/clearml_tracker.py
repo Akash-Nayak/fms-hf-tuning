@@ -94,6 +94,11 @@ class RunURIExporterClearMLCallback(ClearMLCallback):
 
         task = self._clearml.Task.current_task()
 
+        tags_env = os.environ.get("CLEARML_TAGS")
+        if tags_env:
+            tags = [tag.strip() for tag in tags_env.split(",") if tag.strip()]
+            task.add_tags(tags)
+
         task_id = task.id
         task_uri = task.get_output_log_web_page()
         if not task_uri:
@@ -149,10 +154,12 @@ class ClearMLTracker(Tracker):
         """
         project = self.config.clearml_project
         task = self.config.clearml_task
+        tags = self.config.clearml_tags
 
         # Modify the environment expected by clearml
         os.environ["CLEARML_PROJECT"] = project
         os.environ["CLEARML_TASK"] = task
+        os.environ["CLEARML_TAGS"] = tags
 
         cb = RunURIExporterClearMLCallback()
 
